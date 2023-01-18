@@ -31,7 +31,7 @@
     </div>
     <div class="type">
       <div class="perType">
-        <img src="" alt="">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
       </div>
     </div>
     <div class="hotArticle">
@@ -108,7 +108,7 @@ export default {
     .title {
       font-size: 25px;
       margin-bottom: 20px;
-    }
+    }   
     .perArticle {
       width: 150px;
       height: 200px;
