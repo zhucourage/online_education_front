@@ -1,43 +1,96 @@
 <template>
   <div class="home-container">
+
+
+    <!-- header & search  -->
     <div class="header">
       <div class="title">XStudy</div>
-      <van-icon name="search" size="30" />
+      <van-icon name="search" size="35" />
     </div>
 
+
+    <!-- swiper -->
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img
-            src="https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg"
-            alt="loading..."
-          />
+          <img src="https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg" alt="loading..." />
         </div>
         <div class="swiper-slide">
-          <img
-            src="https://hbr.org/resources/images/article_assets/2022/04/01-BI_WEB3_STACKPOLE_HERO-1536x669.jpg"
-            alt="loading..."
-          />
+          <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/machine.png"
+            alt="loading..." />
         </div>
         <div class="swiper-slide">
-          <img
-            src="https://w.wallhaven.cc/full/rr/wallhaven-rrd6gj.jpg"
-            alt="loading..."
-          />
+          <img src="https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg" alt="loading..." />
         </div>
       </div>
-      <!-- 如果需要分页器 -->
+      <!-- 分页器 -->
       <div class="swiper-pagination"></div>
     </div>
+
+
+    <!-- 分类 -->
     <div class="type">
       <div class="perType">
         <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/linux-icon.png" alt="" />
+        <div class="name">Linux</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/obsidian.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/flag-united-states_1f1fa-1f1f8.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/machine_Learning_2.png" alt="" />
+        <div class="name">java</div>
+      </div>
+      <div class="perType">
+        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/d-python-symbol-white-background-rendering-224812812-removebg-preview.png" alt="" />
+        <div class="name">java</div>
       </div>
     </div>
+
+
+    <!-- hot article -->
+    <div class="title">Hot Articles</div>
     <div class="hotArticle">
-      <div class="title">Hot Articles</div>
-      <div class="perArticle"></div>
+      <div class="perArticle">
+        <div class="img"></div>
+        <div class="name">dddd</div>
+      </div>
+      <div class="perArticle">
+        <div class="img"></div>
+        <div class="name"></div>
+      </div>
+      <div class="perArticle">
+        <div class="img"></div>
+        <div class="name"></div>
+      </div>
     </div>
+
+
   </div>
 </template>
 
@@ -80,17 +133,20 @@ export default {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+
     .title {
       font-size: 29px;
       font-weight: 600;
     }
+
     .van-icon-search {
       box-sizing: border-box;
       border-radius: 20px;
       padding: 5px;
-      background-color: rgb(249, 246, 246);
+      // background-color: rgb(249, 246, 246);
     }
   }
+
   .swiper-container {
     border-radius: 10px;
     width: 100%;
@@ -98,21 +154,65 @@ export default {
     margin: 0 auto;
     overflow: hidden;
     margin-bottom: 30px;
+
     img {
       width: inherit;
       height: auto;
       object-fit: cover;
     }
   }
-  .hotArticle {
-    .title {
+
+  .type {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .perType {
+      width: 17%;
+      height: auto;
+      img {
+        width: 85%;
+      }
+      .name {
+        font-size: 17px;
+        color: gray;
+        text-align: center;
+      }
+    }
+  }
+  .title {
       font-size: 25px;
       margin-bottom: 20px;
-    }   
+    }
+  .hotArticle {
+    border: 1px solid green;
+    width: 100%;
+    height: 200px;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
     .perArticle {
-      width: 150px;
-      height: 200px;
-      border: 2px solid red;
+      width: 200px;
+      height: inherit;
+      display: inline-block;
+      margin-right: 20px;
+      box-sizing: border-box;
+      .img {
+        width: 100%;
+        height: 170px;
+        background-color: rgb(152, 121, 121);
+        img {
+          width: 100%;
+        }
+      }
+      .name {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        font-size: 15px;
+        background-color: rgb(183, 105, 105);
+      }
     }
   }
 }
