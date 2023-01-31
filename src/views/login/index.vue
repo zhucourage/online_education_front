@@ -2,27 +2,37 @@
   <div class="login-container">
     <!-- 返回 -->
     <div class="back" @click="$router.back()">
-      <van-icon name="arrow-left" size="25" color="white" />
+      <van-icon name="arrow-left" size="25" />
     </div>
-    <!-- log in -->
+
+
+    <!-- title -->
     <div class="nav">Log In</div>
+
+
     <!-- 表单 -->
     <div class="inputs">
       <div class="id">
-        <van-icon name="contact" color="white" size="27" />
-        <input type="number" v-model="user.mobile"/>
+        <van-icon name="contact" size="27" />
+        <input type="text" v-model="user.id"/>
       </div>
       <div class="password">
-        <van-icon name="closed-eye" color="white" size="27" />
+        <van-icon name="closed-eye" size="27" />
         <input type="password" v-model="user.code"/>
       </div>
     </div>
-    <!-- 输入错误提示 -->
+
+
+    <!-- 错误提示 -->
     <div class="tips">Incorrect code</div>
+    
+
     <!-- 登陆按钮 -->
-    <div class="login">
-      <button>Log In</button>
+    <div class="login" >
+      <button @click="onLogin">Log In</button>
     </div>
+
+
   </div>
 </template>
 
@@ -31,22 +41,24 @@ export default {
   data() {
     return {
       user: {
-        moblie: "",
+        id: "",
         code: "",
       },
     };
   },
+  methods:{
+    onLogin(){
+      console.log(123);
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .login-container {
   position: relative;
-  height: 100vh;
   padding: 50px 40px 0 40px;
-  background-color: #444a58;
   .nav {
-    color: white;
     font-weight: 700;
     font-size: 30px;
     margin: 40px 0;
@@ -56,11 +68,22 @@ export default {
     .van-icon {
       margin: auto 0;
     }
-    .id,
+    .id {
+      display: flex;
+      border-bottom: 1px solid rgb(0, 0, 0);
+      margin-bottom: 27px;
+      input {
+        letter-spacing: 2px;
+      }
+    }
     .password {
       display: flex;
-      border-bottom: 1px solid rgb(223, 222, 222);
+      border-bottom: 1px solid rgb(0, 0, 0);
       margin-bottom: 27px;
+      letter-spacing: 5px;
+      input {
+        letter-spacing: 5px;
+      }
     }
     input {
       margin: 0 0 5px 15px;
@@ -68,7 +91,6 @@ export default {
       border: none;
       height: 30px;
       width: 100%;
-      color: white;
       font-size: 20px;
     }
   }
@@ -89,13 +111,11 @@ export default {
       margin: 50px auto;
       width: 230px;
       height: 60px;
-      background-color: rgb(35, 35, 35);
-      color: white;         
       font-size: 25px; 
       font-weight: 600;
       border-radius: 28px;
       border: none;
-      box-shadow: 0 2px 27px 6px rgba(219, 219, 219, 0.12);
+      box-shadow: 0 10px 15px 2px rgba(36, 36, 36, 0.12);
     }
   }
 }
