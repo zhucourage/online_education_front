@@ -148,7 +148,7 @@ export default {
   }
 
   .swiper-container {
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100%;
     height: 190px;
     margin: 0 auto;
