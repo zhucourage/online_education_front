@@ -16,11 +16,11 @@
     <div class="inputs">
       <div class="id">
         <van-icon name="contact" size="27" />
-        <input type="text" v-model="user.id"/>
+        <input type="text" v-model="user.name"/>
       </div>
       <div class="password">
         <van-icon name="closed-eye" size="27" />
-        <input type="password" v-model="user.code"/>
+        <input type="password" v-model="user.password"/>
       </div>
     </div>
 
@@ -39,19 +39,21 @@
 </template>
 
 <script>
+import { login } from '@/api/login';
 export default {
   data() {
     return {
       user: {
-        id: "",
-        code: "",
+        name: "",
+        password: "",
       },
     };
   },
   methods:{
-    onLogin(){
-      console.log(123);
-    }
+    async onLogin(){
+      const res = await login(this.user);
+      console.log(res);
+    },
   }
 };
 </script>
