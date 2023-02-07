@@ -1,6 +1,6 @@
 <template>
   <div class="qa-container">
-    qa
+    blog
   </div>
 </template>
 

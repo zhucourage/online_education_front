@@ -1,5 +1,7 @@
 <template>
   <div class="login-container">
+
+    
     <!-- 返回 -->
     <div class="back" @click="$router.back()">
       <van-icon name="arrow-left" size="25" />
@@ -8,7 +10,7 @@
 
     <!-- title -->
     <div class="nav">Log In</div>
-
+    
 
     <!-- 表单 -->
     <div class="inputs">
