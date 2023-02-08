@@ -1,38 +1,62 @@
 <template>
   <div class='article_list_container'>
-    list222
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-cell v-for="(item,index) in articles" :key="index" :title="item" />
+    </van-list>
   </div>
 </template>
 
 <script>
-
+import {getArticleById} from "@/api/init"
 export default {
   components: {},
-  data () {
-    // 这里存放数据
+  data() {
+    
     return {
-
+      articles: [],
+      loading: false,
+      finished: false,
     }
   },
   methods: {
-  created () {
+    async onLoad() {
+      const {data} = await getArticleById({
+        id: this.type.id
+      })
+      this.articles.push(...data.data)
+      this.loading = false
+    },
+  },
+  props: {
+    type: {
+      require: true,
+      type: Object
+    }
+  },
+  computed: {},
+  watch: {},
+  created() {
+  },
+  mounted() {
 
   },
-  mounted () {
-
-  },
-  beforeCreate () { }, // 生命周期 - 创建之前
-  beforeMount () { }, // 生命周期 - 挂载之前
-  beforeUpdate () { }, // 生命周期 - 更新之前
-  updated () { }, // 生命周期 - 更新之后
-  beforeDestroy () { }, // 生命周期 - 销毁之前
-  destroyed () { }, // 生命周期 - 销毁完成
-  activated () { }, // 如果页面有keep-alive缓存功能，这个函数会触发
-  }
+  beforeCreate() { }, // 生命周期 - 创建之前
+  beforeMount() { }, // 生命周期 - 挂载之前
+  beforeUpdate() { }, // 生命周期 - 更新之前
+  updated() { }, // 生命周期 - 更新之后
+  beforeDestroy() { }, // 生命周期 - 销毁之前
+  destroyed() { }, // 生命周期 - 销毁完成
+  activated() { }, // 如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 
 <style lang='less' scoped>
-//@import url(); 引入公共css类
-
+.article_list_container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  top: 46px;
+  overflow-y: auto;
+}
 </style>

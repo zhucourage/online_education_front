@@ -2,7 +2,7 @@
   <div class='article_container'>
     <van-tabs v-model="active">
   <van-tab :title="type.type" v-for="type in types" >  
-    <ArticleList/>
+    <ArticleList :type="type"/>
   </van-tab>
     
       

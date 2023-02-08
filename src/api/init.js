@@ -6,3 +6,10 @@ export const getTypes = () => {
         url:"/types",
     })
 }
+
+export const getArticleById = (data) => {
+    return request({
+        method:"get",
+        url:"/article/"+data.id,
+    })
+}
