@@ -1,30 +1,29 @@
 <template>
   <div class='article_list_container'>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-      <van-cell v-for="(item,index) in articles" :key="index" :title="item" />
+      <van-cell v-for="item in list" :key="item.id" :title="item.title" />
     </van-list>
   </div>
 </template>
 
 <script>
-import {getArticleById} from "@/api/init"
+import { getArticleById } from "@/api/init"
 export default {
   components: {},
   data() {
-    
     return {
-      articles: [],
+      list: [],
       loading: false,
       finished: false,
     }
   },
   methods: {
     async onLoad() {
-      const {data} = await getArticleById({
+      const { data } = await getArticleById({
         id: this.type.id
       })
-      this.articles.push(...data.data)
-      this.loading = false
+      this.list.push(...data.data)
+      this.loading = false;
     },
   },
   props: {
