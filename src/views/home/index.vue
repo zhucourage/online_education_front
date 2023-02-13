@@ -40,8 +40,6 @@
 <script>
 import { getChannel } from "@/api/index_init";
 import { getLastArticle } from "@/api/index_init";
-
-Vue.use(Lazyload);
 export default {
   data() {
     return {
