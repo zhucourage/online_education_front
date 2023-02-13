@@ -40,11 +40,13 @@
 <script>
 import { getChannel } from "@/api/index_init";
 import { getLastArticle } from "@/api/index_init";
+import { getHotArticle } from "@/api/index_init";
 export default {
   data() {
     return {
       channels: [],
       swipeList: [],
+      hotList: [],
       list: [],
       loading: false,
       finished: false,
@@ -60,6 +62,10 @@ export default {
     async getLastArticle() {
       let { data } = await getLastArticle();
       this.swipeList = data.data;
+    },
+    async getHotArticle(pageNum) {
+      let { data } = await getHotArticle(pageNum);
+      console.log(data);
     },
     onLoad() {
       // 异步更新数据
@@ -81,6 +87,7 @@ export default {
   created() {
     this.getChannel();
     this.getLastArticle();
+    this.getHotArticle(2);
   },
 };
 </script>

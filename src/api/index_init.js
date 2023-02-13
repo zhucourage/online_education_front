@@ -13,3 +13,11 @@ export const getLastArticle = () => {
         url:"/index/lastArticle",
     })
 }
+
+
+export const getHotArticle = pageNum => {
+    return request({
+        method:"get",
+        url:"/index/hotArticle?pageNum=" + pageNum + "&pageSize=1",
+    })
+}
