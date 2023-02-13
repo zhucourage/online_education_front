@@ -1,24 +1,26 @@
 <template>
   <div class="my-container">
-    <div class="header">
-      <div class="logining">
-        <div class="img">
-          <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/profile_photo/test.jpg" alt="">
-        </div>
-        <div class="info">
-          <div class="name"></div>
-          <div class="number">17863900390</div>
-        </div>
-        <div class="more">
-          <van-icon name="arrow" />
-        </div>
-      </div>
-      <div class="logined"  @click="toLogin">
-        点击登陆
-      </div>
-    </div>
+    <van-cell-group :border="false" class="user_info">
+      <van-cell title="zhucourage" value="" center :border="false">
+        <van-image
+          slot="icon"
+          round
+          width="80"
+          height="80"
+          src="./user.png"
+          fit="cover"
+        />
+        <van-icon name="arrow" slot="right-icon" size="22" />
+      </van-cell>
+    </van-cell-group>
+    <van-grid :column-num="2" center>
+      <van-grid-item icon="star-o" text="收藏" />
+      <van-grid-item icon="browsing-history-o" text="历史" />
+    </van-grid>
 
+    <van-cell title="单元格" is-link />
 
+    <!-- <div class="logined" @click="toLogin">点击登陆</div> -->
   </div>
 </template>
 
@@ -26,61 +28,24 @@
 export default {
   methods: {
     toLogin() {
-      this.$router.push('/login')
-    }
-  }
-
-
-}
+      this.$router.push("/login");
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
 .my-container {
-  padding: 40px 25px;
-
-  .header {
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
-
-    .img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50px;
-      border: 2px solid white;
-      overflow: hidden;
-      margin-right: 10px;
-
-      img {
-        width: 100%;
-      }
+  margin-top: 40px;
+  .user_info {
+    margin: 0 25px;
+    .van-cell__title {
+      margin-left: 25px;
+      font-size: 20px;
     }
-
-    .info {
-      position: relative;
-      width: auto;
-
-      .name {
-        font-size: 26px;
-      }
-
-      .number {
-        position: absolute;
-        bottom: 0;
-        font-size: 20px;
-        color: gray;
-      }
+    .van-image {
+      border: 2px solid rgb(221, 220, 220);
     }
-
-    .more {}
-
   }
-
-  .login {
-    border: 1px solid red;
-    color: red;
-  }
-
-
 }
 </style>

@@ -1,127 +1,88 @@
 <template>
   <div class="home-container">
-
-
     <!-- header & search  -->
     <div class="header">
       <div class="title">XStudy</div>
       <van-icon name="search" size="35" />
     </div>
 
-
-    <!-- swiper -->
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg" alt="loading..." />
-        </div>
-        <div class="swiper-slide">
-          <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/machine.png"
-            alt="loading..." />
-        </div>
-        <div class="swiper-slide">
-          <img src="https://w.wallhaven.cc/full/l8/wallhaven-l83o92.jpg" alt="loading..." />
-        </div>
-      </div>
-      <!-- 分页器 -->
-      <div class="swiper-pagination"></div>
-    </div>
-
+    <!-- swipe -->
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+      <van-swipe-item v-for="(item, index) in swipeList" :key="index">
+        <img :src="item.pic_url[0].picUrl" />
+      </van-swipe-item>
+    </van-swipe>
 
     <!-- 分类 -->
-    <div class="type">
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/linux-icon.png" alt="" />
-        <div class="name">Linux</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/java-icon-images-5.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/obsidian.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/flag-united-states_1f1fa-1f1f8.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/machine_Learning_2.png" alt="" />
-        <div class="name">java</div>
-      </div>
-      <div class="perType">
-        <img src="http://rok8si1hi.hb-bkt.clouddn.com/online_education/thumbnail/d-python-symbol-white-background-rendering-224812812-removebg-preview.png" alt="" />
-        <div class="name">java</div>
-      </div>
-    </div>
-
+    <div class="title">Channels</div>
+    <van-grid :column-num="4" :border="false" :icon-size="45">
+      <van-grid-item
+        v-for="(item, index) in channels"
+        :key="index"
+        :icon="item.icon"
+        :text="item.type"
+      />
+    </van-grid>
 
     <!-- hot article -->
     <div class="title">Hot Articles</div>
-    <div class="hotArticle">
-      <div class="perArticle">
-        <div class="img"></div>
-        <div class="name">dddd</div>
-      </div>
-      <div class="perArticle">
-        <div class="img"></div>
-        <div class="name"></div>
-      </div>
-      <div class="perArticle">
-        <div class="img"></div>
-        <div class="name"></div>
-      </div>
-    </div>
-
-
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <van-cell v-for="item in list" :key="item" :title="item" />
+    </van-list>
   </div>
 </template>
 
 <script>
-import Swiper from "swiper";
-import "swiper/css/swiper.min.css";
+import { getChannel } from "@/api/index_init";
+import { getLastArticle } from "@/api/index_init";
 
+Vue.use(Lazyload);
 export default {
-  mounted() {
-    var mySwiper = new Swiper(".swiper-container", {
-      // direction: "vertical", // 垂直切换选项
-      loop: true, // 循环模式选项
+  data() {
+    return {
+      channels: [],
+      swipeList: [],
+      list: [],
+      loading: false,
+      finished: false,
+    };
+  },
+  methods: {
+    async getChannel() {
+      if (this.channels.length == 0) {
+        const { data } = await getChannel();
+        this.channels = data.data;
+      }
+    },
+    async getLastArticle() {
+      let { data } = await getLastArticle();
+      this.swipeList = data.data;
+    },
+    onLoad() {
+      // 异步更新数据
+      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
+      setTimeout(() => {
+        for (let i = 0; i < 10; i++) {
+          this.list.push(this.list.length + 1);
+        }
+        // 加载状态结束
+        this.loading = false;
 
-      // 如果需要分页器
-      pagination: {
-        el: ".swiper-pagination",
-      },
-
-      // 如果需要前进后退按钮
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-
-      // 如果需要滚动条
-      scrollbar: {
-        el: ".swiper-scrollbar",
-      },
-      autoplay: true,
-      effect: "slide",
-    });
+        // 数据全部加载完成
+        if (this.list.length >= 40) {
+          this.finished = true;
+        }
+      }, 1000);
+    },
+  },
+  created() {
+    this.getChannel();
+    this.getLastArticle();
   },
 };
 </script>
@@ -129,6 +90,7 @@ export default {
 <style lang="less" scoped="true">
 .home-container {
   padding: 40px 32px;
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -143,77 +105,30 @@ export default {
       box-sizing: border-box;
       border-radius: 20px;
       padding: 5px;
-      // background-color: rgb(249, 246, 246);
     }
   }
 
-  .swiper-container {
-    border-radius: 5px;
-    width: 100%;
-    height: 190px;
-    margin: 0 auto;
-    overflow: hidden;
-    margin-bottom: 30px;
-
-    img {
-      width: inherit;
-      height: auto;
-      object-fit: cover;
-    }
-  }
-
-  .type {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    .perType {
-      width: 17%;
-      height: auto;
+  .my-swipe {
+    margin-bottom: 35px;
+    .van-swipe-item {
+      border-radius: 3px;
+      text-align: center;
+      height: 200px;
+      overflow: hidden;
       img {
-        width: 85%;
-      }
-      .name {
-        font-size: 17px;
-        color: gray;
-        text-align: center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
+  }
+  .van-grid {
+    margin-top: -15px;
+    margin-bottom: 23px;
   }
   .title {
-      font-size: 25px;
-      margin-bottom: 20px;
-    }
-  .hotArticle {
-    border: 1px solid green;
-    width: 100%;
-    height: 200px;
-    white-space: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    .perArticle {
-      width: 200px;
-      height: inherit;
-      display: inline-block;
-      margin-right: 20px;
-      box-sizing: border-box;
-      .img {
-        width: 100%;
-        height: 170px;
-        background-color: rgb(152, 121, 121);
-        img {
-          width: 100%;
-        }
-      }
-      .name {
-        width: 100%;
-        height: 30px;
-        line-height: 30px;
-        font-size: 15px;
-        background-color: rgb(183, 105, 105);
-      }
-    }
+    font-size: 25px;
+    margin-bottom: 20px;
   }
 }
 </style>
